@@ -1,12 +1,12 @@
-import AppBody from "../components/PageContent";
+import PageContent from "./components/PageContent";
 import "./App.scss";
-import LayoutWithSidebar from "../layouts/LayoutWithSidebar";
+import LayoutWithSidebar from "./layouts/LayoutWithSidebar";
 
 function App() {
   return (
     <div className="App">
       <LayoutWithSidebar>
-        <AppBody />
+        <PageContent />
       </LayoutWithSidebar>
     </div>
   );

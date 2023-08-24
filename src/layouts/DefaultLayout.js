@@ -1,7 +1,9 @@
-import { Space, Layout, theme } from "antd";
+import { Space, Layout, theme, Breadcrumb } from "antd";
+import { Outlet } from "react-router-dom";
+import AppHeader from "../components/Header";
 const { Header, Footer, Content } = Layout;
 
-function DefaultLayout() {
+function DefaultLayout(props) {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
@@ -24,19 +26,40 @@ function DefaultLayout() {
   };
 
   return (
-    <Space
-      direction="vertical"
-      style={{
-        width: "100%",
-      }}
-      size={[0, 48]}
-    >
-      <Layout>
-        <Header style={headerStyle}>App Header</Header>
-        <Content style={contentStyle}>Content</Content>
-        <Footer style={footerStyle}>Footer</Footer>
-      </Layout>
-    </Space>
+    <div className="App">
+      <Space
+        direction="vertical"
+        style={{
+          width: "100%",
+        }}
+        size={[0, 48]}
+      >
+        <Layout>
+          <Header style={headerStyle}>
+            <AppHeader />
+          </Header>
+          <Content style={contentStyle}>
+            <Breadcrumb
+              style={{
+                margin: "16px 0",
+              }}
+              items={[{ title: "Home", href: "/" }]}
+            ></Breadcrumb>
+            <Layout
+              style={{
+                padding: "24px 0",
+                background: colorBgContainer,
+              }}
+            >
+              <Outlet />
+              {props.children}
+            </Layout>
+          </Content>
+
+          <Footer style={footerStyle}>Footer</Footer>
+        </Layout>
+      </Space>
+    </div>
   );
 }
 

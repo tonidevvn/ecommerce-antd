@@ -1,8 +1,9 @@
 import { Space, Layout, Breadcrumb, theme } from "antd";
 import AppHeader from "../components/Header";
+import { Outlet } from "react-router-dom";
 const { Header, Footer, Sider, Content } = Layout;
 
-function LayoutWithSidebar({ children }) {
+function LayoutWithSidebar() {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
@@ -28,40 +29,43 @@ function LayoutWithSidebar({ children }) {
   };
 
   return (
-    <Space
-      direction="vertical"
-      style={{
-        width: "100%",
-      }}
-      size={[0, 48]}
-    >
-      <Layout>
-        <Header style={headerStyle}>
-          <AppHeader />
-        </Header>
-        <Content style={contentStyle}>
-          <Breadcrumb
-            style={{
-              margin: "16px 0",
-            }}
-            items={[{ title: "Home", href: "/" }]}
-          ></Breadcrumb>
-          <Layout
-            style={{
-              padding: "24px 0",
-              background: colorBgContainer,
-            }}
-            hasSider
-          >
-            <Sider style={siderStyle} width={200}>
-              Sider
-            </Sider>
-            <Content style={contentStyle}>{children}</Content>
-          </Layout>
-        </Content>
-        <Footer style={footerStyle}>Footer</Footer>
-      </Layout>
-    </Space>
+    <div className="App">
+      <Space
+        direction="vertical"
+        style={{
+          width: "100%",
+        }}
+        size={[0, 48]}
+      >
+        <Layout>
+          <Header style={headerStyle}>
+            <AppHeader />
+          </Header>
+          <Content style={contentStyle}>
+            <Breadcrumb
+              style={{
+                margin: "16px 0",
+              }}
+              items={[{ title: "Home", href: "/" }]}
+            ></Breadcrumb>
+            <Layout
+              style={{
+                padding: "24px 0",
+                background: colorBgContainer,
+              }}
+            >
+              <Sider style={siderStyle} width={200}>
+                Sider
+              </Sider>
+              <Content style={contentStyle}>
+                <Outlet />
+              </Content>
+            </Layout>
+          </Content>
+          <Footer style={footerStyle}>Footer</Footer>
+        </Layout>
+      </Space>
+    </div>
   );
 }
 
