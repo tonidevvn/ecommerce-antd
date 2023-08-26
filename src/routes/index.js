@@ -4,6 +4,7 @@ import Category from "../views/Category";
 import ErrorPage from "../views/Error";
 import DefaultLayout from "../layouts/DefaultLayout";
 import PageContent from "../components/PageContent";
+import Home from "../views/Home";
 
 function AppRoutes() {
   const router = createBrowserRouter([
@@ -15,7 +16,7 @@ function AppRoutes() {
         {
           path: "products/categories/:categoryId",
           element: (
-            <PageContent hasSider>
+            <PageContent>
               <Category />
             </PageContent>
           ),
@@ -25,6 +26,14 @@ function AppRoutes() {
           element: (
             <PageContent>
               <About />
+            </PageContent>
+          ),
+        },
+        {
+          path: "",
+          element: (
+            <PageContent hasSider>
+              <Home />
             </PageContent>
           ),
         },

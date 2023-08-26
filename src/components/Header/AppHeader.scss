@@ -1,3 +1,27 @@
+.appHeader {
+  height: 64px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: space-between;
+
+  .appTitle {
+    h1,
+    h2,
+    h3 {
+      font-size: 2rem;
+    }
+  }
+
+  .shoppingCart {
+    margin-top: 10px;
+    .shoppingCardIcon {
+      font-size: 26px;
+    }
+  }
+}
+
 li a,
 li span {
   -webkit-touch-callout: none; /* iOS Safari */

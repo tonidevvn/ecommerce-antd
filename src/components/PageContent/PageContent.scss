@@ -1,0 +1,25 @@
+.appBody {
+  display: flex;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.itemCard {
+  margin: 8px;
+
+  .itemTitle {
+    padding-top: 16px;
+  }
+
+  .itemRating {
+    ul {
+      font-size: 14px;
+      line-height: 32px;
+    }
+  }
+
+  .itemCardImage {
+    height: 150px !important;
+    object-fit: scale-down;
+  }
+}

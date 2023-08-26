@@ -1,7 +1,7 @@
 import Sider from "antd/es/layout/Sider";
 import { Layout, theme } from "antd";
-import "./AppBody.scss";
-import Sibar from "../Sibar";
+import "./PageContent.scss";
+import Sidebar from "../Sidebar";
 
 const { Content } = Layout;
 
@@ -26,7 +26,7 @@ function PageContent(props) {
     <div className="appBody">
       {hasSider && (
         <Sider style={siderStyle} width={200}>
-          <Sibar />
+          <Sidebar />
         </Sider>
       )}
 

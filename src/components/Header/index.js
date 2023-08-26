@@ -1,5 +1,5 @@
-import { Menu } from "antd";
-import { HomeOutlined } from "@ant-design/icons";
+import { Badge, Menu, Typography } from "antd";
+import { HomeOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import "./AppHeader.scss";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
@@ -88,13 +88,23 @@ function AppHeader() {
 
   return (
     <div className="appHeader">
-      <Menu
-        onClick={onClick}
-        selectedKeys={[current]}
-        mode="horizontal"
-        items={menuItems}
-        theme="light"
-      />
+      <div className="menuHeader">
+        <Menu
+          onClick={onClick}
+          selectedKeys={[current]}
+          mode="horizontal"
+          items={menuItems}
+          theme="light"
+        />
+      </div>
+      <div className="appTitle">
+        <Typography.Title>Toni Store</Typography.Title>
+      </div>
+      <div className="shoppingCart">
+        <Badge count={5}>
+          <ShoppingCartOutlined className="shoppingCardIcon" />
+        </Badge>
+      </div>
     </div>
   );
 }
