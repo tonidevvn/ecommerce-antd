@@ -309,7 +309,7 @@ function AppHeader() {
         />
       </div>
       <div className="appTitle">
-        <Typography.Title>Toni Store</Typography.Title>
+        <Typography.Title>Toni Store 🛍</Typography.Title>
       </div>
       <div className="shoppingCart">
         <ShoppingCart />

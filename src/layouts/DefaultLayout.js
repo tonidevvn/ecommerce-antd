@@ -1,6 +1,7 @@
 import { Space, Layout, theme, Breadcrumb } from "antd";
 import { Outlet } from "react-router-dom";
 import AppHeader from "../components/Header";
+import AppFooter from "../components/Footer";
 const { Header, Footer, Content } = Layout;
 
 function DefaultLayout(props) {
@@ -23,6 +24,9 @@ function DefaultLayout(props) {
   };
   const footerStyle = {
     textAlign: "center",
+    height: "60px",
+    color: "azure",
+    backgroundColor: "black",
   };
 
   return (
@@ -56,7 +60,9 @@ function DefaultLayout(props) {
             </Layout>
           </Content>
 
-          <Footer style={footerStyle}>Footer</Footer>
+          <Footer style={footerStyle}>
+            <AppFooter />
+          </Footer>
         </Layout>
       </Space>
     </div>

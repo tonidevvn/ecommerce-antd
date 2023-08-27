@@ -1,5 +1,6 @@
 import { Space, Layout, Breadcrumb, theme } from "antd";
 import AppHeader from "../components/Header";
+import AppFooter from "../components/Footer";
 import { Outlet } from "react-router-dom";
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -62,7 +63,9 @@ function LayoutWithSidebar() {
               </Content>
             </Layout>
           </Content>
-          <Footer style={footerStyle}>Footer</Footer>
+          <Footer style={footerStyle}>
+            <AppFooter />
+          </Footer>
         </Layout>
       </Space>
     </div>
