@@ -45,3 +45,14 @@ export const addToCard = async (id) => {
     return [];
   }
 };
+
+export const getSingleCard = async (id = 1) => {
+  try {
+    const resp = await axios.get(`https://dummyjson.com/carts/${id}`);
+    console.log("🚀 ~ file: index.js:53 ~ getSingleCard ~ resp:", resp.data);
+    return resp.data;
+  } catch (error) {
+    console.log("🚀 ~ file: index.js:55 ~ getSingleCard ~ error:", error);
+    return [];
+  }
+};

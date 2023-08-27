@@ -16,9 +16,22 @@
 
   .shoppingCart {
     margin-top: 10px;
+    cursor: pointer;
+    user-select: none;
+
     .shoppingCardIcon {
       font-size: 26px;
     }
+  }
+}
+
+.cartDrawer {
+  .cartSummary {
+    font-weight: 700;
+  }
+
+  .checkoutBtn {
+    margin: 5px;
   }
 }
 
