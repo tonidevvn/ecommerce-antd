@@ -1,4 +1,4 @@
-import { Space, Layout, theme, Breadcrumb } from "antd";
+import { Layout, theme, Breadcrumb } from "antd";
 import { Outlet } from "react-router-dom";
 import AppHeader from "../components/Header";
 import AppFooter from "../components/Footer";
@@ -10,18 +10,26 @@ function DefaultLayout(props) {
   } = theme.useToken();
 
   const headerStyle = {
+    overflow: "hidden",
     textAlign: "center",
     height: 64,
     paddingInline: 50,
     lineHeight: "64px",
     background: colorBgContainer,
+    boxShadow: "1px 4px 4px #00000033",
+    position: "fixed" /* Set the navbar to fixed position */,
+    top: 0 /* Position the navbar at the top of the page */,
+    width: "100%" /* Full width */,
+    zIndex: 1,
   };
+
   const contentStyle = {
     textAlign: "center",
     minHeight: 120,
     lineHeight: "auto",
-    padding: "0 50px",
+    padding: "60px 50px 0px",
   };
+
   const footerStyle = {
     textAlign: "center",
     height: "60px",
@@ -31,40 +39,33 @@ function DefaultLayout(props) {
 
   return (
     <div className="App">
-      <Space
-        direction="vertical"
-        style={{
-          width: "100%",
-        }}
-        size={[0, 48]}
-      >
-        <Layout>
-          <Header style={headerStyle}>
-            <AppHeader />
-          </Header>
-          <Content style={contentStyle}>
-            <Breadcrumb
-              style={{
-                margin: "16px 0",
-              }}
-              items={[{ title: "Home", href: "/" }]}
-            ></Breadcrumb>
-            <Layout
-              style={{
-                padding: "24px 0",
-                background: colorBgContainer,
-              }}
-            >
-              <Outlet />
-              {props.children}
-            </Layout>
-          </Content>
+      <Layout>
+        <Header style={headerStyle}>
+          <AppHeader />
+        </Header>
+        <Content style={contentStyle}>
+          <Breadcrumb
+            style={{
+              margin: "16px 0",
+              padding: "0px 15px",
+            }}
+            items={[{ title: "Home", href: "/" }]}
+          ></Breadcrumb>
+          <Layout
+            style={{
+              padding: "24px 0",
+              background: colorBgContainer,
+            }}
+          >
+            <Outlet />
+            {props.children}
+          </Layout>
+        </Content>
 
-          <Footer style={footerStyle}>
-            <AppFooter />
-          </Footer>
-        </Layout>
-      </Space>
+        <Footer style={footerStyle}>
+          <AppFooter />
+        </Footer>
+      </Layout>
     </div>
   );
 }

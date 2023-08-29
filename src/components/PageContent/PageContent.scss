@@ -2,10 +2,16 @@
   display: flex;
   flex: 1;
   overflow-y: auto;
+  margin-top: 20px;
 }
 
 .itemCard {
   margin: 8px;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    transform: translateY(-10px);
+  }
 
   .itemTitle {
     padding-top: 16px;
@@ -21,5 +27,15 @@
   .itemCardImage {
     height: 150px !important;
     object-fit: scale-down;
+  }
+}
+
+.checkoutForm {
+  .cartSummary {
+    font-weight: 700;
+  }
+
+  .checkoutBtn {
+    margin: 5px;
   }
 }

@@ -17,7 +17,9 @@ function PageContent(props) {
     textAlign: "center",
     minHeight: 120,
     lineHeight: "auto",
-    padding: "0 50px",
+    padding: "0 20px",
+    witdth: "100%",
+    maxWidth: "100%",
   };
 
   const { hasSider, children } = props;
@@ -25,7 +27,13 @@ function PageContent(props) {
   return (
     <div className="appBody">
       {hasSider && (
-        <Sider style={siderStyle} width={200}>
+        <Sider
+          style={siderStyle}
+          width={200}
+          breakpoint={"lg"}
+          collapsedWidth={0}
+          trigger={null}
+        >
           <Sidebar />
         </Sider>
       )}

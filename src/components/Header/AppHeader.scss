@@ -10,10 +10,9 @@
     h1,
     h2,
     h3 {
-      font-size: 2rem;
+      font-size: 1.5rem;
     }
   }
-
   .shoppingCart {
     margin-top: 10px;
     cursor: pointer;
@@ -22,16 +21,6 @@
     .shoppingCardIcon {
       font-size: 26px;
     }
-  }
-}
-
-.cartDrawer {
-  .cartSummary {
-    font-weight: 700;
-  }
-
-  .checkoutBtn {
-    margin: 5px;
   }
 }
 
@@ -44,4 +33,19 @@ li span {
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
+}
+
+@media (min-width: 992px) {
+  .menuBtn {
+    display: none;
+  }
+  .menuHeader {
+    width: 45%;
+  }
+}
+
+@media (max-width: 992px) {
+  .menuHeader {
+    width: 10%;
+  }
 }

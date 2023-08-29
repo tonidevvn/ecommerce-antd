@@ -5,6 +5,8 @@ import ErrorPage from "../views/Error";
 import DefaultLayout from "../layouts/DefaultLayout";
 import PageContent from "../components/PageContent";
 import Home from "../views/Home";
+import Cart from "../views/Cart";
+import { ThankYou } from "../views/Checkout";
 
 function AppRoutes() {
   const router = createBrowserRouter([
@@ -26,6 +28,22 @@ function AppRoutes() {
           element: (
             <PageContent>
               <About />
+            </PageContent>
+          ),
+        },
+        {
+          path: "cart",
+          element: (
+            <PageContent>
+              <Cart />
+            </PageContent>
+          ),
+        },
+        {
+          path: "thank-you",
+          element: (
+            <PageContent>
+              <ThankYou />
             </PageContent>
           ),
         },
