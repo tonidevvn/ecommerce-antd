@@ -1,6 +1,7 @@
 import { useRouteError } from "react-router-dom";
 import DefaultLayout from "../../layouts/DefaultLayout";
 import PageContent from "../../components/PageContent";
+import ErrorImg from "../../assets/images/404_error.svg";
 
 function ErrorPage() {
   const error = useRouteError();
@@ -14,6 +15,11 @@ function ErrorPage() {
           <p>
             <i>{error.statusText || error.message}</i>
           </p>
+          <img
+            src={ErrorImg}
+            style={{ width: "350px", maxWidth: "60%" }}
+            alt="404 Error"
+          />
         </div>
       </PageContent>
     </DefaultLayout>
