@@ -16,15 +16,7 @@ const MainMenu = () => {
     // navigator(`/${e.key}`);
   };
 
-  const menuItems = [
-    {
-      label: (
-        <NavLink to="/">
-          <HomeOutlined />
-        </NavLink>
-      ),
-      key: "home",
-    },
+  const menuMobile = [
     {
       label: (
         <NavLink to="products/categories/smartphones">Smartphones</NavLink>
@@ -95,7 +87,19 @@ const MainMenu = () => {
     },
   ];
 
-  const MenuShowing = ({ mode = "horizontal", visible = true }) => {
+  const menuLgScreen = [
+    {
+      label: (
+        <NavLink to="/">
+          <HomeOutlined />
+        </NavLink>
+      ),
+      key: "home",
+    },
+    ...menuMobile,
+  ];
+
+  const MenuShowing = ({ mode = "horizontal", visible = true, menuItems }) => {
     return visible ? (
       <Menu
         onClick={onClick}
@@ -118,7 +122,7 @@ const MainMenu = () => {
         "🚀 ~ file: index.js:112 ~ MainMenu ~ menuBtnVisible:",
         menuBtnVisible
       )}
-      <MenuShowing visible={!menuBtnVisible} />
+      <MenuShowing visible={!menuBtnVisible} menuItems={menuLgScreen} />
       <Button
         className="menuBtn"
         type="dashed"
@@ -132,7 +136,7 @@ const MainMenu = () => {
         onClose={() => setVisible(false)}
         open={visible}
       >
-        <MenuShowing mode="inline" />
+        <MenuShowing mode="inline" menuItems={menuMobile} />
       </Drawer>
     </>
   );
