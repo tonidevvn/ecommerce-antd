@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import Products from "../../components/Products";
+import { makeUpLabel } from "../../utils";
 
 function Category(props) {
   // returned from `useParams`
@@ -8,7 +9,7 @@ function Category(props) {
 
   return (
     <>
-      <div>Category {key}</div>
+      <h2>Category {makeUpLabel(key)}</h2>
       <div>
         <Products category={key} />
       </div>

@@ -11,6 +11,23 @@ export const getAllProducts = async () => {
   }
 };
 
+export const getAllProductsCategories = async () => {
+  try {
+    const resp = await axios.get("https://dummyjson.com/products/categories");
+    console.log(
+      "🚀 ~ file: index.js:18 ~ getAllProductsCategories ~ resp:",
+      resp.data
+    );
+    return resp.data;
+  } catch (error) {
+    console.log(
+      "🚀 ~ file: index.js:8 ~ getAllProductsCategories ~ error:",
+      error
+    );
+    return [];
+  }
+};
+
 export const getProductsByCategory = async (category) => {
   try {
     const resp = await axios.get(
