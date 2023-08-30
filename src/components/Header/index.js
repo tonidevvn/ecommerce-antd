@@ -4,7 +4,7 @@ import "./AppHeader.scss";
 import { useEffect, useState } from "react";
 import { getSingleCard } from "../../services";
 import MainMenu from "../Menu";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const ShoppingCart = () => {
   const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
@@ -48,7 +48,9 @@ function AppHeader() {
         <MainMenu />
       </div>
       <div className="appTitle">
-        <Typography.Title>Toni Store 🛍</Typography.Title>
+        <Link to="/">
+          <Typography.Title>Toni Store 🛍</Typography.Title>
+        </Link>
       </div>
       <div className="shoppingCart">
         <ShoppingCart />
