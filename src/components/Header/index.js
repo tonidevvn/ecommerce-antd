@@ -1,4 +1,4 @@
-import { Badge, Button, Drawer, Typography } from "antd";
+import { Badge, Button, Popover, Typography } from "antd";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import "./AppHeader.scss";
 import { useEffect, useState } from "react";
@@ -7,7 +7,6 @@ import MainMenu from "../Menu";
 import { Link, useNavigate } from "react-router-dom";
 
 const ShoppingCart = () => {
-  const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
   const [cartItems, setCardItems] = useState([]);
   const navigator = useNavigate();
 
@@ -16,27 +15,30 @@ const ShoppingCart = () => {
   }, []);
 
   const handleCheckoutSubmit = () => {
-    setCartDrawerOpen(false);
     navigator("/cart");
+  };
+
+  const CartHolder = () => {
+    console.log(cartItems);
+    return (
+      <Button type="text" onClick={() => handleCheckoutSubmit()}>
+        Checkout
+      </Button>
+    );
   };
 
   return (
     <>
-      <Badge count={cartItems.length} onClick={() => setCartDrawerOpen(true)}>
-        <ShoppingCartOutlined className="shoppingCardIcon" />
-      </Badge>
-
-      <Drawer
-        open={cartDrawerOpen}
-        onClose={() => setCartDrawerOpen(false)}
-        title="Your Cart"
-        contentWrapperStyle={{ width: "500px" }}
-        className="cartDrawer"
+      <Popover
+        placement="bottom"
+        title={"Your Cart"}
+        content={<CartHolder />}
+        trigger="click"
       >
-        <Button type="text" onClick={() => handleCheckoutSubmit()}>
-          Checkout
-        </Button>
-      </Drawer>
+        <Badge count={cartItems.length}>
+          <ShoppingCartOutlined className="shoppingCardIcon" />
+        </Badge>
+      </Popover>
     </>
   );
 };

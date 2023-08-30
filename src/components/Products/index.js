@@ -44,7 +44,7 @@ const ListProducts = ({ products }) => {
       setproductsData(products);
       setLoading(false);
       setCurrentPage(1);
-    }, 1500);
+    }, 1000);
   }, [products]);
 
   return (

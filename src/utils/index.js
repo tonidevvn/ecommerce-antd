@@ -2,10 +2,6 @@ import { useEffect, useMemo, useState } from "react";
 
 export function makeUpLabel(key) {
   let newTitle = key.charAt(0).toUpperCase() + key.slice(1);
-  console.log(
-    "🚀 ~ file: index.js:18 ~ getCategoryTitle ~ newTitle:",
-    newTitle
-  );
 
   return newTitle.replace(/-(.)/g, function (match, group) {
     return " " + group.toUpperCase();

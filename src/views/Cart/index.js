@@ -99,104 +99,107 @@ function Cart() {
   };
 
   return (
-    <div className="checkoutForm">
-      <Table
-        dataSource={cartItems}
-        pagination={false}
-        rowKey={(data) => data.id}
-        summary={(data) => {
-          const total = data.reduce((prev, curr) => {
-            return prev + curr.total;
-          }, 0);
+    <>
+      <h2>🥰 Just a minute to finish your checkout.</h2>
+      <div className="checkoutForm">
+        <Table
+          dataSource={cartItems}
+          pagination={false}
+          rowKey={(data) => data.id}
+          summary={(data) => {
+            const total = data.reduce((prev, curr) => {
+              return prev + curr.total;
+            }, 0);
 
-          const discountPrice = data.reduce((prev, curr) => {
-            return prev + curr.discountedPrice;
-          }, 0);
+            const discountPrice = data.reduce((prev, curr) => {
+              return prev + curr.discountedPrice;
+            }, 0);
 
-          return (
-            <>
-              <tr>
-                <td colSpan="4">
-                  <span className="cartSummary">
-                    Discounted amount: $
-                    {parseFloat(total - discountPrice).toFixed(0)}
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td colSpan="4">
-                  <span className="cartSummary">
-                    Total amount: ${parseFloat(discountPrice).toFixed(0)}{" "}
-                    <Typography.Text delete type="danger">
-                      ${parseFloat(total).toFixed(0)}
-                    </Typography.Text>
-                  </span>
-                </td>
-              </tr>
-            </>
-          );
-        }}
-        columns={[
-          {
-            title: "Title",
-            dataIndex: "title",
-          },
-          {
-            title: "Quantity",
-            dataIndex: "quantity",
-            render: (value, record) => {
-              return (
-                <InputNumber
-                  defaultValue={value}
-                  min={0}
-                  style={{ width: "65px" }}
-                  onChange={(value) => {
-                    console.log(
-                      "🚀 ~ file: index.js:160 ~ ShoppingCart ~ record:",
-                      record
-                    );
-                    console.log(
-                      "🚀 ~ file: index.js:160 ~ ShoppingCart ~ value:",
-                      value
-                    );
+            return (
+              <>
+                <tr>
+                  <td colSpan="4">
+                    <span className="cartSummary">
+                      Discounted amount: $
+                      {parseFloat(total - discountPrice).toFixed(0)}
+                    </span>
+                  </td>
+                </tr>
+                <tr>
+                  <td colSpan="4">
+                    <span className="cartSummary">
+                      Total amount: ${parseFloat(discountPrice).toFixed(0)}{" "}
+                      <Typography.Text delete type="danger">
+                        ${parseFloat(total).toFixed(0)}
+                      </Typography.Text>
+                    </span>
+                  </td>
+                </tr>
+              </>
+            );
+          }}
+          columns={[
+            {
+              title: "Title",
+              dataIndex: "title",
+            },
+            {
+              title: "Quantity",
+              dataIndex: "quantity",
+              render: (value, record) => {
+                return (
+                  <InputNumber
+                    defaultValue={value}
+                    min={0}
+                    style={{ width: "65px" }}
+                    onChange={(value) => {
+                      console.log(
+                        "🚀 ~ file: index.js:160 ~ ShoppingCart ~ record:",
+                        record
+                      );
+                      console.log(
+                        "🚀 ~ file: index.js:160 ~ ShoppingCart ~ value:",
+                        value
+                      );
 
-                    const newCartItems = cartItems.map((item) => {
-                      return item.id === record.id
-                        ? {
-                            ...item,
-                            total: item.price * value,
-                            discountedPrice:
-                              (item.price *
-                                value *
-                                (100 - item.discountPercentage)) /
-                              100,
-                          }
-                        : item;
-                    });
-                    setCardItems(newCartItems);
-                  }}
-                />
-              );
+                      const newCartItems = cartItems.map((item) => {
+                        return item.id === record.id
+                          ? {
+                              ...item,
+                              total: item.price * value,
+                              discountedPrice:
+                                (item.price *
+                                  value *
+                                  (100 - item.discountPercentage)) /
+                                100,
+                            }
+                          : item;
+                      });
+                      setCardItems(newCartItems);
+                    }}
+                  />
+                );
+              },
             },
-          },
-          {
-            title: "Price",
-            dataIndex: "price",
-            render: (value, record) => {
-              return `$${value}`;
+            {
+              title: "Price",
+              dataIndex: "price",
+              render: (value, record) => {
+                return `$${value}`;
+              },
             },
-          },
-          {
-            title: "Total",
-            dataIndex: "total",
-            render: (value, record) => {
-              return `$${value}`;
+            {
+              title: "Total",
+              dataIndex: "total",
+              render: (value, record) => {
+                return `$${value}`;
+              },
             },
-          },
-        ]}
-      />
-      <CheckoutCartBtn onFinish={() => handleCheckoutSubmit()} />
-    </div>
+          ]}
+        />
+        <CheckoutCartBtn onFinish={() => handleCheckoutSubmit()} />
+      </div>
+    </>
   );
 }
 

@@ -1,7 +1,8 @@
 import { Layout, theme, Breadcrumb } from "antd";
-import { Outlet } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 import AppHeader from "../components/Header";
 import AppFooter from "../components/Footer";
+import { makeUpLabel } from "../utils";
 const { Header, Footer, Content } = Layout;
 
 function DefaultLayout(props) {
@@ -37,6 +38,16 @@ function DefaultLayout(props) {
     backgroundColor: "black",
   };
 
+  const params = useParams();
+  const key = params.categoryId;
+  let breadCrumbs = [{ title: "Home", href: "/" }];
+
+  if (!!key)
+    breadCrumbs = [
+      ...breadCrumbs,
+      { title: makeUpLabel(key), href: `/products/categories/${key}` },
+    ];
+
   return (
     <div className="App">
       <Layout>
@@ -49,7 +60,7 @@ function DefaultLayout(props) {
               margin: "16px 0",
               padding: "0px 15px",
             }}
-            items={[{ title: "Home", href: "/" }]}
+            items={breadCrumbs}
           ></Breadcrumb>
           <Layout
             style={{
