@@ -8,6 +8,45 @@ export function makeUpLabel(key) {
   });
 }
 
+export function addCartItem(cartItems, addedItem) {
+  let newCartItems = [];
+  const tmpCart = [...cartItems];
+  let isExist = tmpCart.some((_item) => _item.id === addedItem.id);
+  if (!!isExist) {
+    newCartItems = tmpCart.map((_item) =>
+      _item.id === addedItem.id
+        ? { ..._item, quantity: _item.quantity + 1 }
+        : _item
+    );
+  } else {
+    newCartItems = [
+      ...tmpCart,
+      {
+        ...addedItem,
+        quantity: 1,
+        total: addedItem.price,
+        discountedPrice: Number(
+          parseFloat(
+            (addedItem.price * (100 - addedItem.discountPercentage)) / 100
+          ).toFixed(0)
+        ),
+      },
+    ];
+  }
+  localStorage.setItem("order", JSON.stringify(newCartItems));
+  return newCartItems;
+}
+
+export function removeCartItem(cartItems, removedItem) {
+  let newCartItems = [...cartItems];
+  localStorage.setItem("order", JSON.stringify(newCartItems));
+  return newCartItems.filter((item) => item.id !== removedItem.id);
+}
+
+export function clearCart() {
+  localStorage.setItem("order", JSON.stringify([]));
+}
+
 export default function useOnScreen(ref) {
   const [isIntersecting, setIntersecting] = useState(false);
 

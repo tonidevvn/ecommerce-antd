@@ -1,29 +1,30 @@
-import { useEffect, useState } from "react";
-import {
-  addToCard,
-  getAllProducts,
-  getProductsByCategory,
-} from "../../services";
+import { useContext, useEffect, useState } from "react";
+import { getAllProducts, getProductsByCategory } from "../../services";
 import { Button, Card, Image, List, Rate, Tabs, message } from "antd";
 import Meta from "antd/es/card/Meta";
 
 import { Typography, Badge } from "antd";
+import { AppContext } from "../../context";
+import { addCartItem } from "../../utils";
 
 const AddToCardButton = ({ item }) => {
   const [isLoading, setIsLoading] = useState();
 
+  const { cartItems, setCartItems } = useContext(AppContext);
+
   const onClick = () => {
-    async function fetchData() {
-      const data = await addToCard(item.id);
-      console.log("🚀 ~ file: index.js:13 ~ fetchData ~ data:", data);
-      setIsLoading(false);
-      message.success(`${item.title} has been added to card 👌`);
-      return data.data;
-    }
     setIsLoading(true);
+    message.success(`${item.title} has been added to card 👌`);
+    let newCartItems = addCartItem(cartItems, item);
+    setCartItems(newCartItems);
+    console.log(
+      "🚀 ~ file: index.js:24 ~ CartHolder ~ cartItems:",
+      newCartItems
+    );
+
     setTimeout(() => {
-      fetchData();
-    }, 1000);
+      setIsLoading(false);
+    }, 500);
   };
 
   return (

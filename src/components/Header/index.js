@@ -1,47 +1,8 @@
-import { Badge, Button, Popover, Typography } from "antd";
-import { ShoppingCartOutlined } from "@ant-design/icons";
+import { Typography } from "antd";
 import "./AppHeader.scss";
-import { useEffect, useState } from "react";
-import { getSingleCard } from "../../services";
 import MainMenu from "../Menu";
-import { Link, useNavigate } from "react-router-dom";
-
-const ShoppingCart = () => {
-  const [cartItems, setCardItems] = useState([]);
-  const navigator = useNavigate();
-
-  useEffect(() => {
-    getSingleCard(1).then((res) => setCardItems(res.products));
-  }, []);
-
-  const handleCheckoutSubmit = () => {
-    navigator("/cart");
-  };
-
-  const CartHolder = () => {
-    console.log(cartItems);
-    return (
-      <Button type="text" onClick={() => handleCheckoutSubmit()}>
-        Checkout
-      </Button>
-    );
-  };
-
-  return (
-    <>
-      <Popover
-        placement="bottom"
-        title={"Your Cart"}
-        content={<CartHolder />}
-        trigger="click"
-      >
-        <Badge count={cartItems.length}>
-          <ShoppingCartOutlined className="shoppingCardIcon" />
-        </Badge>
-      </Popover>
-    </>
-  );
-};
+import { Link } from "react-router-dom";
+import ShoppingCart from "../ShoppingCart";
 
 function AppHeader() {
   return (

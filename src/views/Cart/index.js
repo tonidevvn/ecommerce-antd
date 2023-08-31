@@ -9,9 +9,11 @@ import {
   Typography,
   message,
 } from "antd";
-import React, { useEffect, useState } from "react";
-import { getSingleCard } from "../../services";
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AppContext } from "../../context";
+import ShoppingImg from "../../assets/images/shopping.svg";
+import { clearCart } from "../../utils";
 
 const CheckoutCartBtn = ({ onFinish }) => {
   const [checkoutDrawerOpen, setCheckoutDrawerOpen] = useState(false);
@@ -87,118 +89,137 @@ const CheckoutCartBtn = ({ onFinish }) => {
 function Cart() {
   const navigator = useNavigate();
 
-  const [cartItems, setCardItems] = useState([]);
-
-  useEffect(() => {
-    getSingleCard(1).then((res) => setCardItems(res.products));
-  }, []);
+  const { cartItems, setCartItems } = useContext(AppContext);
 
   const handleCheckoutSubmit = () => {
     message.success("Your order has been placed successfully.");
+    setCartItems([]);
+    clearCart();
     navigator("/thank-you");
   };
 
   return (
     <>
-      <h2>🥰 Just a minute to finish your checkout.</h2>
-      <div className="checkoutForm">
-        <Table
-          dataSource={cartItems}
-          pagination={false}
-          rowKey={(data) => data.id}
-          summary={(data) => {
-            const total = data.reduce((prev, curr) => {
-              return prev + curr.total;
-            }, 0);
+      {!!cartItems && cartItems.length > 0 ? (
+        <>
+          <h2>🥰 Just a minute to finish your checkout.</h2>
+          <div className="checkoutForm">
+            <Table
+              dataSource={cartItems}
+              pagination={false}
+              rowKey={(data) => data.id}
+              summary={(data) => {
+                const total = data.reduce((prev, curr) => {
+                  return prev + curr.total;
+                }, 0);
 
-            const discountPrice = data.reduce((prev, curr) => {
-              return prev + curr.discountedPrice;
-            }, 0);
+                const discountPrice = data.reduce((prev, curr) => {
+                  return prev + curr.discountedPrice;
+                }, 0);
 
-            return (
-              <>
-                <tr>
-                  <td colSpan="4">
-                    <span className="cartSummary">
-                      Discounted amount: $
-                      {parseFloat(total - discountPrice).toFixed(0)}
-                    </span>
-                  </td>
-                </tr>
-                <tr>
-                  <td colSpan="4">
-                    <span className="cartSummary">
-                      Total amount: ${parseFloat(discountPrice).toFixed(0)}{" "}
-                      <Typography.Text delete type="danger">
-                        ${parseFloat(total).toFixed(0)}
-                      </Typography.Text>
-                    </span>
-                  </td>
-                </tr>
-              </>
-            );
-          }}
-          columns={[
-            {
-              title: "Title",
-              dataIndex: "title",
-            },
-            {
-              title: "Quantity",
-              dataIndex: "quantity",
-              render: (value, record) => {
+                const totalQty = data.reduce((prev, curr) => {
+                  return prev + curr.quantity;
+                }, 0);
+
                 return (
-                  <InputNumber
-                    defaultValue={value}
-                    min={0}
-                    style={{ width: "65px" }}
-                    onChange={(value) => {
-                      console.log(
-                        "🚀 ~ file: index.js:160 ~ ShoppingCart ~ record:",
-                        record
-                      );
-                      console.log(
-                        "🚀 ~ file: index.js:160 ~ ShoppingCart ~ value:",
-                        value
-                      );
-
-                      const newCartItems = cartItems.map((item) => {
-                        return item.id === record.id
-                          ? {
-                              ...item,
-                              total: item.price * value,
-                              discountedPrice:
-                                (item.price *
-                                  value *
-                                  (100 - item.discountPercentage)) /
-                                100,
-                            }
-                          : item;
-                      });
-                      setCardItems(newCartItems);
-                    }}
-                  />
+                  <>
+                    <tr>
+                      <td colSpan="4">
+                        <span className="cartSummary">
+                          Discounted amount: $
+                          {parseFloat(total - discountPrice).toFixed(0)}
+                        </span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colSpan="4">
+                        <span className="cartSummary">
+                          Total amount ({totalQty} items): $
+                          {parseFloat(discountPrice).toFixed(0)}{" "}
+                          <Typography.Text delete type="danger">
+                            ${parseFloat(total).toFixed(0)}
+                          </Typography.Text>
+                        </span>
+                      </td>
+                    </tr>
+                  </>
                 );
-              },
-            },
-            {
-              title: "Price",
-              dataIndex: "price",
-              render: (value, record) => {
-                return `$${value}`;
-              },
-            },
-            {
-              title: "Total",
-              dataIndex: "total",
-              render: (value, record) => {
-                return `$${value}`;
-              },
-            },
-          ]}
-        />
-        <CheckoutCartBtn onFinish={() => handleCheckoutSubmit()} />
-      </div>
+              }}
+              columns={[
+                {
+                  title: "Title",
+                  dataIndex: "title",
+                },
+                {
+                  title: "Quantity",
+                  dataIndex: "quantity",
+                  render: (value, record) => {
+                    return (
+                      <InputNumber
+                        defaultValue={value}
+                        min={0}
+                        style={{ width: "65px" }}
+                        onChange={(value) => {
+                          console.log(
+                            "🚀 ~ file: index.js:160 ~ ShoppingCart ~ record:",
+                            record
+                          );
+                          console.log(
+                            "🚀 ~ file: index.js:160 ~ ShoppingCart ~ value:",
+                            value
+                          );
+
+                          const newCartItems = cartItems.map((item) => {
+                            return item.id === record.id
+                              ? {
+                                  ...item,
+                                  total: item.price * value,
+                                  discountedPrice:
+                                    (item.price *
+                                      value *
+                                      (100 - item.discountPercentage)) /
+                                    100,
+                                }
+                              : item;
+                          });
+                          setCartItems(newCartItems);
+                        }}
+                      />
+                    );
+                  },
+                },
+                {
+                  title: "Price",
+                  dataIndex: "price",
+                  render: (value, record) => {
+                    return `$${value}`;
+                  },
+                },
+                {
+                  title: "Total",
+                  dataIndex: "total",
+                  render: (value, record) => {
+                    return `$${value}`;
+                  },
+                },
+              ]}
+            />
+            <CheckoutCartBtn onFinish={() => handleCheckoutSubmit()} />
+          </div>
+        </>
+      ) : (
+        <>
+          <h2>
+            👋 Your shopping cart is empty. How about adding some items to it?{" "}
+            <br /> Return <Link to="/"> home page</Link>.
+          </h2>
+          <img
+            src={ShoppingImg}
+            alt="Shopping with us"
+            style={{ width: "350px", maxWidth: "80%" }}
+          />
+        </>
+      )}
     </>
   );
 }

@@ -47,7 +47,11 @@ function Sidebar() {
         />
       </Card>
 
-      <img src={ShoppingImg} alt="Shopping with us" />
+      <img
+        src={ShoppingImg}
+        alt="Shopping with us"
+        style={{ width: "350px", maxWidth: "80%" }}
+      />
     </>
   );
 }

@@ -24,6 +24,20 @@
   }
 }
 
+.cartHolder {
+  display: flex;
+  flex-direction: column;
+
+  .removeCartItem {
+    cursor: pointer;
+  }
+
+  .checkOutBtn {
+    margin: auto;
+    padding: 5px 35px;
+  }
+}
+
 li a,
 li span {
   -webkit-touch-callout: none; /* iOS Safari */
