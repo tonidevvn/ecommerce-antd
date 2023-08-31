@@ -43,6 +43,10 @@ export function removeCartItem(cartItems, removedItem) {
   return newCartItems.filter((item) => item.id !== removedItem.id);
 }
 
+export function updateCart(cartItems) {
+  localStorage.setItem("order", JSON.stringify(cartItems));
+}
+
 export function clearCart() {
   localStorage.setItem("order", JSON.stringify([]));
 }

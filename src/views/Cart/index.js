@@ -13,7 +13,7 @@ import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AppContext } from "../../context";
 import ShoppingImg from "../../assets/images/shopping.svg";
-import { clearCart } from "../../utils";
+import { clearCart, updateCart } from "../../utils";
 
 const CheckoutCartBtn = ({ onFinish }) => {
   const [checkoutDrawerOpen, setCheckoutDrawerOpen] = useState(false);
@@ -173,6 +173,7 @@ function Cart() {
                             return item.id === record.id
                               ? {
                                   ...item,
+                                  quantity: value,
                                   total: item.price * value,
                                   discountedPrice:
                                     (item.price *
@@ -183,6 +184,7 @@ function Cart() {
                               : item;
                           });
                           setCartItems(newCartItems);
+                          updateCart(newCartItems);
                         }}
                       />
                     );
