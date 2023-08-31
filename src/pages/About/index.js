@@ -9,7 +9,7 @@ function About() {
       <AuthorBio />
       <img
         src={AboutImg}
-        style={{ width: "350px", maxWidth: "60%" }}
+        style={{ width: "280px", maxWidth: "60%" }}
         alt="About me"
       />
     </>

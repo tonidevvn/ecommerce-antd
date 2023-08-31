@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import SuperThank from "../../assets/images/super_thank_you.svg";
 
-export const ThankYou = () => {
+const ThankYou = () => {
   return (
     <div>
       <h2>
@@ -9,9 +9,11 @@ export const ThankYou = () => {
       </h2>
       <img
         src={SuperThank}
-        style={{ width: "350px", maxWidth: "60%" }}
+        style={{ width: "280px", maxWidth: "60%" }}
         alt="Thank you"
       />
     </div>
   );
 };
+
+export default ThankYou;

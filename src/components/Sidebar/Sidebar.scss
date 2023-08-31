@@ -7,3 +7,9 @@
     padding: 7px 0;
   }
 }
+
+@media (max-width: 992px) {
+  .authSider {
+    display: none;
+  }
+}

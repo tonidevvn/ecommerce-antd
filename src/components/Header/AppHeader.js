@@ -1,8 +1,8 @@
 import { Typography } from "antd";
 import "./AppHeader.scss";
-import MainMenu from "../Menu";
 import { Link } from "react-router-dom";
 import ShoppingCart from "../ShoppingCart";
+import MainMenu from "../Menu/MainMenu";
 
 function AppHeader() {
   return (

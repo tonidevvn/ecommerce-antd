@@ -1,0 +1,26 @@
+.appHeader {
+  height: 64px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: space-between;
+
+  .appTitle {
+    h1,
+    h2,
+    h3 {
+      font-size: 1.5rem;
+    }
+  }
+
+  .appNotifStyle {
+    cursor: pointer;
+  }
+}
+
+@media (min-width: 992px) {
+  .menuBtn {
+    display: none;
+  }
+}

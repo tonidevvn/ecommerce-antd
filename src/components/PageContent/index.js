@@ -1,7 +1,7 @@
 import Sider from "antd/es/layout/Sider";
 import { Layout, theme } from "antd";
 import "./PageContent.scss";
-import Sidebar from "../Sidebar";
+import Sidebar from "../Sidebar/MainSider";
 
 const { Content } = Layout;
 
@@ -13,9 +13,8 @@ function PageContent(props) {
   const siderStyle = {
     background: colorBgContainer,
   };
+
   const contentStyle = {
-    textAlign: "center",
-    minHeight: 120,
     lineHeight: "auto",
     padding: "0 20px",
     witdth: "100%",

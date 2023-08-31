@@ -218,7 +218,7 @@ function Cart() {
           <img
             src={ShoppingImg}
             alt="Shopping with us"
-            style={{ width: "350px", maxWidth: "80%" }}
+            style={{ width: "280px", maxWidth: "80%" }}
           />
         </>
       )}

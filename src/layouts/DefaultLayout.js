@@ -1,8 +1,9 @@
 import { Layout, theme, Breadcrumb } from "antd";
 import { Outlet, useParams } from "react-router-dom";
-import AppHeader from "../components/Header";
 import AppFooter from "../components/Footer";
+import AppHeader from "../components/Header/AppHeader";
 import { makeUpLabel } from "../utils";
+import App from "../App";
 const { Header, Footer, Content } = Layout;
 
 function DefaultLayout(props) {
@@ -25,6 +26,9 @@ function DefaultLayout(props) {
   };
 
   const contentStyle = {
+    display: "flex",
+    flexDirection: "column",
+    flex: 1,
     textAlign: "center",
     minHeight: 120,
     lineHeight: "auto",
@@ -49,7 +53,7 @@ function DefaultLayout(props) {
     ];
 
   return (
-    <div className="App">
+    <App>
       <Layout>
         <Header style={headerStyle}>
           <AppHeader />
@@ -77,7 +81,7 @@ function DefaultLayout(props) {
           <AppFooter />
         </Footer>
       </Layout>
-    </div>
+    </App>
   );
 }
 

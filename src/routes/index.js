@@ -1,19 +1,29 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import About from "../views/About";
-import Category from "../views/Category";
-import ErrorPage from "../views/Error";
-import DefaultLayout from "../layouts/DefaultLayout";
 import PageContent from "../components/PageContent";
-import Home from "../views/Home";
-import Cart from "../views/Cart";
-import { ThankYou } from "../views/Checkout";
+import DefaultLayout from "../layouts/DefaultLayout";
+import AuthLayout from "../layouts/AuthLayout";
+import About from "../pages/About";
+import Category from "../pages/Category";
+import ErrorPage from "../pages/Error";
+import Home from "../pages/Home";
+import Cart from "../pages/Cart";
+import ThankYou from "../pages/Checkout";
+import Dashboard from "../pages/Admin/Dashboard";
+import Inventory from "../pages/Admin/Inventory";
+import Users from "../pages/Admin/Customers";
+import Orders from "../pages/Admin/Orders";
+import Customers from "../pages/Admin/Customers";
 
 function AppRoutes() {
   const router = createBrowserRouter([
     {
       path: "/",
       element: <DefaultLayout />,
-      errorElement: <ErrorPage />,
+      errorElement: (
+        <DefaultLayout>
+          <ErrorPage />
+        </DefaultLayout>
+      ),
       children: [
         {
           path: "products/categories/:categoryId",
@@ -52,6 +62,52 @@ function AppRoutes() {
           element: (
             <PageContent hasSider>
               <Home />
+            </PageContent>
+          ),
+        },
+      ],
+    },
+    {
+      path: "/admin",
+      element: <AuthLayout />,
+      children: [
+        {
+          path: "dash-board",
+          element: (
+            <PageContent>
+              <Dashboard />
+            </PageContent>
+          ),
+        },
+        {
+          path: "inventory",
+          element: (
+            <PageContent>
+              <Inventory />
+            </PageContent>
+          ),
+        },
+        {
+          path: "customers",
+          element: (
+            <PageContent>
+              <Customers />
+            </PageContent>
+          ),
+        },
+        {
+          path: "orders",
+          element: (
+            <PageContent>
+              <Orders />
+            </PageContent>
+          ),
+        },
+        {
+          path: "",
+          element: (
+            <PageContent>
+              <Dashboard />
             </PageContent>
           ),
         },
