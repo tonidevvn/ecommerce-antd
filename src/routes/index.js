@@ -10,7 +10,6 @@ import Cart from "../pages/Cart";
 import ThankYou from "../pages/Checkout";
 import Dashboard from "../pages/Admin/Dashboard";
 import Inventory from "../pages/Admin/Inventory";
-import Users from "../pages/Admin/Customers";
 import Orders from "../pages/Admin/Orders";
 import Customers from "../pages/Admin/Customers";
 
