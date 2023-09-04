@@ -17,9 +17,9 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { useEffect, useState } from "react";
-import { getAllCarts } from "../../../services";
+import { getAllCarts, getAllProducts, getAllUsers } from "../../../services";
 
-function DashboardCard({ icon, title, value }) {
+function DashboardCard({ icon, title, value, currency }) {
   return (
     <Card>
       <Space direction="horizontal" size={"large"}>
@@ -28,6 +28,7 @@ function DashboardCard({ icon, title, value }) {
           title={title}
           value={value}
           style={{ textAlign: "center" }}
+          prefix={currency}
         ></Statistic>
       </Space>
     </Card>
@@ -83,6 +84,37 @@ function DashboardChart() {
 }
 
 function Dashboard() {
+  const [orders, setOrders] = useState(0);
+  const [inventory, setInventory] = useState(0);
+  const [customers, setCustomers] = useState(0);
+  const [revenue, setRevenue] = useState(0);
+
+  useEffect(() => {
+    getAllCarts().then((res) => {
+      const totalQuantity = res.carts.reduce((prev, curr) => {
+        return prev + curr.totalQuantity;
+      }, 0);
+      const discountedTotal = res.carts.reduce((prev, curr) => {
+        return prev + curr.discountedTotal;
+      }, 0);
+
+      setOrders(totalQuantity);
+      setRevenue(discountedTotal);
+    });
+
+    getAllProducts().then((res) => {
+      const totalStock = res.products.reduce((prev, curr) => {
+        return prev + curr.stock;
+      }, 0);
+
+      setInventory(totalStock);
+    });
+
+    getAllUsers().then((res) => {
+      setCustomers(res.total || 0);
+    });
+  }, []);
+
   return (
     <>
       <Typography.Title level={3}>Dashboard</Typography.Title>
@@ -102,7 +134,7 @@ function Dashboard() {
             />
           }
           title={"Orders"}
-          value={1234}
+          value={orders}
         />
         <DashboardCard
           icon={
@@ -119,7 +151,7 @@ function Dashboard() {
             />
           }
           title={"Inventory"}
-          value={1234}
+          value={inventory}
         />
         <DashboardCard
           icon={
@@ -136,7 +168,7 @@ function Dashboard() {
             />
           }
           title={"Customers"}
-          value={1234}
+          value={customers}
         />
         <DashboardCard
           icon={
@@ -153,7 +185,8 @@ function Dashboard() {
             />
           }
           title={"Revenue"}
-          value={1234}
+          value={revenue}
+          currency={"$"}
         />
       </Space>
       <RecentOrders />

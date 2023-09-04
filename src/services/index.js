@@ -74,6 +74,17 @@ export const getAllCarts = async () => {
   }
 };
 
+export const getAllUsers = async () => {
+  try {
+    const resp = await axios.get("https://dummyjson.com/users");
+    console.log("🚀 ~ file: index.js:80 ~ getAllUsers ~ resp:", resp.data);
+    return resp.data;
+  } catch (error) {
+    console.log("🚀 ~ file: index.js:55 ~ getAllUsers ~ error:", error);
+    return [];
+  }
+};
+
 export const getSingleCart = async (id = 1) => {
   try {
     const resp = await axios.get(`https://dummyjson.com/carts/${id}`);
