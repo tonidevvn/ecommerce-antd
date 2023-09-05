@@ -19,12 +19,12 @@ const MainMenu = () => {
   const menuMobile = [
     {
       label: (
-        <NavLink to="products/categories/smartphones">Smartphones</NavLink>
+        <NavLink to="/products/categories/smartphones">Smartphones</NavLink>
       ),
       key: "smartphones",
     },
     {
-      label: <NavLink to="products/categories/laptops">Laptops</NavLink>,
+      label: <NavLink to="/products/categories/laptops">Laptops</NavLink>,
       key: "laptops",
     },
     {
@@ -32,16 +32,18 @@ const MainMenu = () => {
       key: "menAccessories",
       children: [
         {
-          label: <NavLink to="products/categories/mens-shirts">Shirts</NavLink>,
+          label: (
+            <NavLink to="/products/categories/mens-shirts">Shirts</NavLink>
+          ),
           key: "menShirts",
         },
         {
-          label: <NavLink to="products/categories/mens-shoes">Shoes</NavLink>,
+          label: <NavLink to="/products/categories/mens-shoes">Shoes</NavLink>,
           key: "menShoes",
         },
         {
           label: (
-            <NavLink to="products/categories/mens-watches">Watches</NavLink>
+            <NavLink to="/products/categories/mens-watches">Watches</NavLink>
           ),
           key: "menWatches",
         },
@@ -53,27 +55,29 @@ const MainMenu = () => {
       children: [
         {
           label: (
-            <NavLink to="products/categories/womens-dresses">Dresses</NavLink>
+            <NavLink to="/products/categories/womens-dresses">Dresses</NavLink>
           ),
           key: "womenDresses",
         },
         {
-          label: <NavLink to="products/categories/womens-shoes">Shoes</NavLink>,
+          label: (
+            <NavLink to="/products/categories/womens-shoes">Shoes</NavLink>
+          ),
           key: "womenShoes",
         },
         {
           label: (
-            <NavLink to="products/categories/womens-watches">Watches</NavLink>
+            <NavLink to="/products/categories/womens-watches">Watches</NavLink>
           ),
           key: "womenWatches",
         },
         {
-          label: <NavLink to="products/categories/womens-bags">Bags</NavLink>,
+          label: <NavLink to="/products/categories/womens-bags">Bags</NavLink>,
           key: "womenBags",
         },
         {
           label: (
-            <NavLink to="products/categories/womens-jewellery">
+            <NavLink to="/products/categories/womens-jewellery">
               Jewellery
             </NavLink>
           ),

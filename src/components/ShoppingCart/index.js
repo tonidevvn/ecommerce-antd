@@ -21,6 +21,11 @@ const ShoppingCart = () => {
     }
   }, []);
 
+  useEffect(() => {
+    if (!!cartItems) localStorage.setItem("order", JSON.stringify(cartItems));
+    else localStorage.setItem("order", "");
+  }, [cartItems]);
+
   const handleCheckoutSubmit = () => {
     navigator("/cart");
     setPopovervisible(false);
