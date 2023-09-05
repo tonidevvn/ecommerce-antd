@@ -2,9 +2,9 @@ import { createContext, useState } from "react";
 
 const AppContext = createContext();
 
-const AppContextProvider = ({ children }) => {
+const AppContextProvider = (props) => {
+  const [user, setUser] = useState("");
   const [cartItems, setCartItems] = useState([]);
-  const [cartInfo, setCartInfo] = useState();
   const [colorMode, setColorMode] = useState("light");
 
   const contextValues = {
@@ -12,11 +12,13 @@ const AppContextProvider = ({ children }) => {
     setCartItems,
     colorMode,
     setColorMode,
-    cartInfo,
-    setCartInfo,
+    user,
+    setUser,
   };
   return (
-    <AppContext.Provider value={contextValues}>{children}</AppContext.Provider>
+    <AppContext.Provider value={contextValues}>
+      {props.children}
+    </AppContext.Provider>
   );
 };
 

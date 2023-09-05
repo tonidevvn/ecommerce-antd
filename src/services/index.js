@@ -106,3 +106,17 @@ export const getSingleCart = async (id = 1) => {
     return [];
   }
 };
+
+export const getAuth = async ({ username, password }) => {
+  try {
+    const resp = await axios.post("https://dummyjson.com/auth/login", {
+      username,
+      password,
+    });
+    console.log("🚀 ~ file: index.js:80 ~ getAuth ~ resp:", resp.data);
+    return resp.data;
+  } catch (error) {
+    console.log("🚀 ~ file: index.js:83 ~ getAuth ~ error:", error);
+    throw error;
+  }
+};

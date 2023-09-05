@@ -1,15 +1,18 @@
 import {
   AppstoreOutlined,
   DashboardOutlined,
+  LogoutOutlined,
   ShoppingCartOutlined,
   UserOutlined,
 } from "@ant-design/icons";
 import { Menu } from "antd";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { AppContext } from "../../context";
 
 const AuthMenu = () => {
   const [current, setCurrent] = useState("home");
+  const { setUser } = useContext(AppContext);
 
   const sibebarMenu = [
     {
@@ -32,11 +35,21 @@ const AuthMenu = () => {
       key: "customers",
       icon: <UserOutlined />,
     },
+    {
+      label: <NavLink to="#logout">Log out</NavLink>,
+      key: "logout",
+      icon: <LogoutOutlined />,
+    },
   ];
 
   const onClick = (e) => {
     console.log("click ", e);
     setCurrent(e.key);
+    if (e.key === "logout") {
+      setTimeout(() => {
+        setUser(null);
+      }, 1000);
+    }
     // navigator(`/${e.key}`);
   };
 

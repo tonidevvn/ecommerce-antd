@@ -12,12 +12,12 @@ import Dashboard from "../pages/Admin/Dashboard";
 import Inventory from "../pages/Admin/Inventory";
 import Orders from "../pages/Admin/Orders";
 import Customers from "../pages/Admin/Customers";
+import Login from "../pages/Admin/Login";
 
 function AppRoutes() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <DefaultLayout />,
       errorElement: (
         <DefaultLayout>
           <ErrorPage />
@@ -27,87 +27,101 @@ function AppRoutes() {
         {
           path: "products/categories/:categoryId",
           element: (
-            <PageContent>
-              <Category />
-            </PageContent>
+            <DefaultLayout>
+              <PageContent>
+                <Category />
+              </PageContent>
+            </DefaultLayout>
           ),
         },
         {
           path: "about",
           element: (
-            <PageContent>
-              <About />
-            </PageContent>
+            <DefaultLayout>
+              <PageContent>
+                <About />
+              </PageContent>
+            </DefaultLayout>
           ),
         },
         {
           path: "cart",
           element: (
-            <PageContent>
-              <Cart />
-            </PageContent>
+            <DefaultLayout>
+              <PageContent>
+                <Cart />
+              </PageContent>
+            </DefaultLayout>
           ),
         },
         {
           path: "thank-you",
           element: (
-            <PageContent>
-              <ThankYou />
-            </PageContent>
+            <DefaultLayout>
+              <PageContent>
+                <ThankYou />
+              </PageContent>
+            </DefaultLayout>
           ),
+        },
+        {
+          path: "/login",
+          element: <Login />,
+        },
+        {
+          path: "/admin",
+          element: <AuthLayout />,
+          children: [
+            {
+              path: "dash-board",
+              element: (
+                <PageContent>
+                  <Dashboard />
+                </PageContent>
+              ),
+            },
+            {
+              path: "inventory",
+              element: (
+                <PageContent>
+                  <Inventory />
+                </PageContent>
+              ),
+            },
+            {
+              path: "customers",
+              element: (
+                <PageContent>
+                  <Customers />
+                </PageContent>
+              ),
+            },
+            {
+              path: "orders",
+              element: (
+                <PageContent>
+                  <Orders />
+                </PageContent>
+              ),
+            },
+            {
+              path: "",
+              element: (
+                <PageContent>
+                  <Dashboard />
+                </PageContent>
+              ),
+            },
+          ],
         },
         {
           path: "",
           element: (
-            <PageContent hasSider>
-              <Home />
-            </PageContent>
-          ),
-        },
-      ],
-    },
-    {
-      path: "/admin",
-      element: <AuthLayout />,
-      children: [
-        {
-          path: "dash-board",
-          element: (
-            <PageContent>
-              <Dashboard />
-            </PageContent>
-          ),
-        },
-        {
-          path: "inventory",
-          element: (
-            <PageContent>
-              <Inventory />
-            </PageContent>
-          ),
-        },
-        {
-          path: "customers",
-          element: (
-            <PageContent>
-              <Customers />
-            </PageContent>
-          ),
-        },
-        {
-          path: "orders",
-          element: (
-            <PageContent>
-              <Orders />
-            </PageContent>
-          ),
-        },
-        {
-          path: "",
-          element: (
-            <PageContent>
-              <Dashboard />
-            </PageContent>
+            <DefaultLayout>
+              <PageContent hasSider>
+                <Home />
+              </PageContent>
+            </DefaultLayout>
           ),
         },
       ],

@@ -1,6 +1,6 @@
 import { Avatar, Badge, Button, List, Popover, Typography } from "antd";
 import { ShoppingCartOutlined } from "@ant-design/icons";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../context";
 import { removeCartItem } from "../../utils";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 const ShoppingCart = () => {
   const { cartItems, setCartItems } = useContext(AppContext);
   const navigator = useNavigate();
+  const [popovervisible, setPopovervisible] = useState(false);
 
   useEffect(() => {
     const cartHistory = JSON.parse(localStorage.getItem("order"));
@@ -22,6 +23,7 @@ const ShoppingCart = () => {
 
   const handleCheckoutSubmit = () => {
     navigator("/cart");
+    setPopovervisible(false);
   };
 
   const CartHolder = () => {
@@ -84,6 +86,10 @@ const ShoppingCart = () => {
     );
   };
 
+  const handlePopoverChange = (newOpen) => {
+    setPopovervisible(newOpen);
+  };
+
   return (
     <>
       <Popover
@@ -91,6 +97,8 @@ const ShoppingCart = () => {
         title={"Your Cart"}
         content={<CartHolder />}
         trigger="click"
+        open={popovervisible}
+        onOpenChange={handlePopoverChange}
       >
         <Badge count={cartItems.length || 0}>
           <ShoppingCartOutlined className="shoppingCardIcon" />

@@ -1,0 +1,17 @@
+.App {
+  background: url(https://picsum.photos/1920/1080);
+  background-origin: content-box, padding-box;
+  background-size: cover;
+}
+.login-form {
+  padding: 25px;
+  margin: auto;
+  background: rgba(116, 116, 116, 0.25);
+  max-width: 380px;
+}
+.login-form-forgot {
+  float: right;
+}
+.login-form-button {
+  width: 100%;
+}

@@ -4,7 +4,7 @@ import {
   ShoppingOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import { Card, Space, Statistic, Typography } from "antd";
+import { Avatar, Card, Space, Statistic, Typography } from "antd";
 import RecentOrders from "../RecentOrders";
 import {
   BarChart,
@@ -16,8 +16,9 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { getAllCarts, getAllProducts, getAllUsers } from "../../../services";
+import { AppContext } from "../../../context";
 
 function DashboardCard({ icon, title, value, currency }) {
   return (
@@ -84,6 +85,7 @@ function DashboardChart() {
 }
 
 function Dashboard() {
+  const { user } = useContext(AppContext);
   const [orders, setOrders] = useState(0);
   const [inventory, setInventory] = useState(0);
   const [customers, setCustomers] = useState(0);
@@ -117,6 +119,10 @@ function Dashboard() {
 
   return (
     <>
+      <Typography.Title level={2}>
+        <Avatar src={user.image} />
+        Halo {user.firstName}
+      </Typography.Title>
       <Typography.Title level={3}>Dashboard</Typography.Title>
       <Space direction="horizontal" size={"middle"} wrap={true}>
         <DashboardCard
