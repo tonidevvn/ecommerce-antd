@@ -15,7 +15,11 @@ export function addCartItem(cartItems, addedItem) {
   if (!!isExist) {
     newCartItems = tmpCart.map((_item) =>
       _item.id === addedItem.id
-        ? { ..._item, quantity: _item.quantity + 1 }
+        ? {
+            ..._item,
+            quantity: _item.quantity + 1,
+            total: _item.total + addedItem.price,
+          }
         : _item
     );
   } else {
@@ -34,6 +38,10 @@ export function addCartItem(cartItems, addedItem) {
     ];
   }
   localStorage.setItem("order", JSON.stringify(newCartItems));
+  console.log(
+    "🚀 ~ file: index.js:41 ~ addCartItem ~ newCartItems:",
+    newCartItems
+  );
   return newCartItems;
 }
 

@@ -13,6 +13,8 @@ import Inventory from "../pages/Admin/Inventory";
 import Orders from "../pages/Admin/Orders";
 import Customers from "../pages/Admin/Customers";
 import Login from "../pages/Admin/Login";
+import Search from "../pages/Search";
+import Product from "../pages/Product";
 
 function AppRoutes() {
   const router = createBrowserRouter([
@@ -25,11 +27,31 @@ function AppRoutes() {
       ),
       children: [
         {
+          path: "products/:productId",
+          element: (
+            <DefaultLayout>
+              <PageContent>
+                <Product />
+              </PageContent>
+            </DefaultLayout>
+          ),
+        },
+        {
           path: "products/categories/:categoryId",
           element: (
             <DefaultLayout>
               <PageContent>
                 <Category />
+              </PageContent>
+            </DefaultLayout>
+          ),
+        },
+        {
+          path: "products/search",
+          element: (
+            <DefaultLayout>
+              <PageContent>
+                <Search />
               </PageContent>
             </DefaultLayout>
           ),

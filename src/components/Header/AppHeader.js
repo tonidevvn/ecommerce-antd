@@ -1,8 +1,9 @@
-import { Typography } from "antd";
 import "./AppHeader.scss";
 import { Link } from "react-router-dom";
 import ShoppingCart from "../ShoppingCart";
 import MainMenu from "../Menu/MainMenu";
+import SearchBox from "../SearchBox";
+import { Typography } from "antd";
 
 function AppHeader() {
   return (
@@ -15,8 +16,14 @@ function AppHeader() {
           <Typography.Title>Toni Store 🛍</Typography.Title>
         </Link>
       </div>
-      <div className="shoppingCart">
-        <ShoppingCart />
+      <div className="rightHeader">
+        <div className="searchCard">
+          <SearchBox />
+        </div>
+
+        <div className="shoppingCart">
+          <ShoppingCart />
+        </div>
       </div>
     </div>
   );

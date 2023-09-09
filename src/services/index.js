@@ -11,6 +11,17 @@ export const getAllProducts = async () => {
   }
 };
 
+export const getSingleProduct = async (id = 1) => {
+  try {
+    const resp = await axios.get(`https://dummyjson.com/products/${id}`);
+    console.log("🚀 ~ file: index.js:6 ~ getSingleProduct ~ resp:", resp.data);
+    return resp.data;
+  } catch (error) {
+    console.log("🚀 ~ file: index.js:8 ~ getSingleProduct ~ error:", error);
+    return [];
+  }
+};
+
 export const getAllProductsCategories = async () => {
   try {
     const resp = await axios.get("https://dummyjson.com/products/categories");
@@ -40,6 +51,26 @@ export const getProductsByCategory = async (category) => {
     return resp.data;
   } catch (error) {
     console.log("🚀 ~ file: index.js:8 ~ getAllProducts ~ error:", error);
+    return [];
+  }
+};
+
+export const getProductsByKeyword = async (query) => {
+  try {
+    console.log(
+      "🚀 ~ file: index.js:48 ~ getProductsByKeyword ~ query:",
+      query
+    );
+    const resp = await axios.get(
+      `https://dummyjson.com/products/search?q=${query}`
+    );
+    console.log(
+      "🚀 ~ file: index.js:18 ~ getProductsByKeyword ~ resp:",
+      resp.data
+    );
+    return resp.data;
+  } catch (error) {
+    console.log("🚀 ~ file: index.js:8 ~ getProductsByKeyword ~ error:", error);
     return [];
   }
 };

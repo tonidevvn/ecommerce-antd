@@ -122,10 +122,6 @@ const MainMenu = () => {
 
   return (
     <>
-      {console.log(
-        "🚀 ~ file: index.js:112 ~ MainMenu ~ menuBtnVisible:",
-        menuBtnVisible
-      )}
       <MenuShowing visible={!menuBtnVisible} menuItems={menuLgScreen} />
       <Button
         className="menuBtn"

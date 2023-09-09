@@ -1,6 +1,6 @@
 import { Layout, theme } from "antd";
 import AppFooter from "../components/Footer";
-import { Navigate, Outlet, useNavigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import AuthHeader from "../components/Header/AuthHeader";
 import AuthSider from "../components/Sidebar/AuthSider";
 import App from "../App";

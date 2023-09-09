@@ -13,13 +13,31 @@
       font-size: 1.5rem;
     }
   }
-  .shoppingCart {
-    margin-top: 10px;
-    cursor: pointer;
-    user-select: none;
 
-    .shoppingCardIcon {
-      font-size: 26px;
+  .rightHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .searchCard {
+      margin-top: 10px;
+      margin-right: 15px;
+      cursor: pointer;
+      user-select: none;
+
+      .searchIcon {
+        font-size: 26px;
+      }
+    }
+
+    .shoppingCart {
+      margin-top: 10px;
+      cursor: pointer;
+      user-select: none;
+
+      .shoppingCardIcon {
+        font-size: 26px;
+      }
     }
   }
 }

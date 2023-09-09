@@ -1,5 +1,5 @@
 import { Avatar, Badge, Button, List, Popover, Typography } from "antd";
-import { ShoppingCartOutlined } from "@ant-design/icons";
+import { DeleteOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../context";
 import { removeCartItem } from "../../utils";
@@ -74,7 +74,7 @@ const ShoppingCart = () => {
                 className="removeCartItem"
                 onClick={() => handleRemoveCartItem(item)}
               >
-                ❌
+                <DeleteOutlined style={{ color: "red" }} />
               </div>
             </List.Item>
           )}

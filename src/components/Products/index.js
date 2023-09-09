@@ -1,11 +1,22 @@
 import { useContext, useEffect, useState } from "react";
-import { getAllProducts, getProductsByCategory } from "../../services";
+import {
+  getAllProducts,
+  getProductsByCategory,
+  getProductsByKeyword,
+} from "../../services";
 import { Button, Card, Image, List, Rate, Tabs, message } from "antd";
 import Meta from "antd/es/card/Meta";
 
 import { Typography, Badge } from "antd";
 import { AppContext } from "../../context";
 import { addCartItem } from "../../utils";
+import {
+  DownOutlined,
+  SortAscendingOutlined,
+  SortDescendingOutlined,
+  UpOutlined,
+} from "@ant-design/icons";
+import { Link } from "react-router-dom";
 
 const AddToCardButton = ({ item }) => {
   const [isLoading, setIsLoading] = useState();
@@ -14,7 +25,7 @@ const AddToCardButton = ({ item }) => {
 
   const onClick = () => {
     setIsLoading(true);
-    message.success(`${item.title} has been added to card 👌`);
+    message.success(`${item.title} has been added to cart 👌`);
     let newCartItems = addCartItem(cartItems, item);
     setCartItems(newCartItems);
     console.log(
@@ -100,7 +111,11 @@ const ListProducts = ({ products }) => {
                 title={
                   <>
                     <Typography.Paragraph>
-                      <Typography.Text>{product.title}</Typography.Text>
+                      <Typography.Title level={4}>
+                        <Link to={`/products/${product.id}`}>
+                          {product.title}
+                        </Link>
+                      </Typography.Title>
                     </Typography.Paragraph>
                     <Typography.Paragraph>
                       Price: $
@@ -131,12 +146,20 @@ const ListProducts = ({ products }) => {
   );
 };
 
-function Products({ category }) {
-  console.log("🚀 ~ file: index.js:33 ~ Products ~ category:", category);
+function Products({ category, query }) {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    if (!!category) {
+    if (!!query) {
+      console.log("🚀 ~ file: index.js:143 ~ useEffect ~ query:", query);
+      getProductsByKeyword(query).then((resp) => {
+        console.log(
+          "🚀 ~ file: index.js:38 ~ getProductsByKeyword ~ resp:",
+          resp.products
+        );
+        setProducts(resp.products);
+      });
+    } else if (!!category) {
       getProductsByCategory(category).then((resp) => {
         console.log(
           "🚀 ~ file: index.js:38 ~ getProductsByCategory ~ resp:",
@@ -153,7 +176,7 @@ function Products({ category }) {
         setProducts(resp.products);
       });
     }
-  }, [category]);
+  }, [category, query]);
 
   const sortProductsBy = (sortedBy) => {
     const sortedArr = [...products].sort((a, b) => {
@@ -178,31 +201,53 @@ function Products({ category }) {
   const sortBy = [
     {
       key: "az",
-      label: "Alphabet A-Z",
+      label: (
+        <>
+          AZ <SortAscendingOutlined />
+        </>
+      ),
     },
     {
       key: "za",
-      label: "Alphabet Z-A",
+      label: (
+        <>
+          ZA <SortDescendingOutlined />
+        </>
+      ),
     },
     {
       key: "lh",
-      label: "Price Low To High",
+      label: (
+        <>
+          Price <UpOutlined />
+        </>
+      ),
     },
     {
       key: "hl",
-      label: "Price High To Low",
+      label: (
+        <>
+          Price <DownOutlined />
+        </>
+      ),
     },
   ];
 
   return (
     <>
-      <Tabs
-        defaultActiveKey="az"
-        items={sortBy}
-        onChange={onChange}
-        centered={true}
-      />
-      <ListProducts products={products} />
+      {!!products && !!products.length ? (
+        <>
+          <Tabs
+            tabPosition="top"
+            items={sortBy}
+            onChange={onChange}
+            style={{ width: "100%", maxWidth: "80vw" }}
+          />
+          <ListProducts products={products} />
+        </>
+      ) : (
+        <ListProducts products={products} />
+      )}
     </>
   );
 }
