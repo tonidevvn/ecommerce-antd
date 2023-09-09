@@ -111,7 +111,7 @@ const ListProducts = ({ products }) => {
                 title={
                   <>
                     <Typography.Paragraph>
-                      <Typography.Title level={4}>
+                      <Typography.Title level={4} style={{ margin: 0 }}>
                         <Link to={`/products/${hashidsEncode(product.id)}`}>
                           {product.title}
                         </Link>

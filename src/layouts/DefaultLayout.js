@@ -61,7 +61,7 @@ function DefaultLayout(props) {
           { title: "Home", href: "/" },
           {
             title: makeUpLabel(resp.category),
-            href: `/products/categories/${resp.categoryid}`,
+            href: `/products/categories/${resp.category}`,
           },
         ]);
       });
