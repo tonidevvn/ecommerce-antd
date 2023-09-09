@@ -32,28 +32,36 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 ## ✨ Screenshots
 
-App homepage
+### App homepage
+
 ![Screenshot-1](/public/Screenshot_1.jpg?raw=true "App homepage")
 
-Cart view
+### Cart view
+
 ![Screenshot-3](/public/Screenshot_3.jpg?raw=true "Cart view")
 
-Product view
+### Product view
+
 ![Screenshot-2](/public/Screenshot_2.jpg?raw=true "Product view")
 
-Search products by keywords
+### Search products by keywords
+
 ![Screenshot-4](/public/Screenshot_4.jpg?raw=true "Search products view")
 
-Checkout view
+### Checkout view
+
 ![Screenshot-5](/public/Screenshot_5.jpg?raw=true "Checkout view")
 
-Confirm an order
+### Confirm an order
+
 ![Screenshot-6](/public/Screenshot_6.jpg?raw=true "Order confirming view")
 
-After checkout
+### After checkout
+
 ![Screenshot-7](/public/Screenshot_7_After_checkout.jpg?raw=true "After checkout view")
 
-Mobile view
+### Mobile view
+
 ![Screenshot-8](/public/Screenshot_8_MobileDisp.jpg?raw=true "Mobile view")
 
 ## ✨ Features
@@ -71,9 +79,7 @@ Administration:
 
 ## 🚀 Styling/ UI Libraries
 
-![SASS](https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white)
-
-![Ant-Design](https://img.shields.io/badge/-AntDesign-%230170FE?style=for-the-badge&logo=ant-design&logoColor=white)
+![SASS](https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white) ![Ant-Design](https://img.shields.io/badge/-AntDesign-%230170FE?style=for-the-badge&logo=ant-design&logoColor=white)
 
 ## 🔨 Code Style
 
@@ -82,3 +88,4 @@ Administration:
 ## 🧑‍💻 I'm Toni 👋
 
 I'm a Web Developer 🖥️, SW Engineer 💻!
+Thanks for your watching 👍
