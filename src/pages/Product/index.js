@@ -15,7 +15,12 @@ import {
 } from "antd";
 import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
 import "./Product.scss";
-import { addCartItem, hashidsDecode, makeUpLabel } from "../../utils";
+import {
+  addCartItem,
+  addCartItems,
+  hashidsDecode,
+  makeUpLabel,
+} from "../../utils";
 import { AppContext } from "../../context";
 
 function Product() {
@@ -46,7 +51,13 @@ function Product() {
     setLoadingAddToCart(true);
 
     message.success(`${product.title} has been added to cart 👌`);
-    let newCartItems = addCartItem(cartItems, product);
+    let addedItems = Array.from({ length: cartQty }, () => product);
+    console.log(
+      "🚀 ~ file: index.js:50 ~ handleAddToCart ~ addedItems:",
+      addedItems
+    );
+
+    let newCartItems = addCartItems(cartItems, addedItems);
     setCartItems(newCartItems);
     setTimeout(() => {
       setLoadingAddToCart(false);

@@ -65,6 +65,8 @@ function DefaultLayout(props) {
           },
         ]);
       });
+    } else {
+      setBreadCrumbs([{ title: "Home", href: "/" }]);
     }
   }, [cid, pid]);
 

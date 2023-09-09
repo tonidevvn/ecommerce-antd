@@ -19,6 +19,14 @@ export function hashidsDecode(anything) {
   return hashids.decode(anything);
 }
 
+export function addCartItems(cartItems, addedItems) {
+  let newCartItems = [];
+  for (const item of addedItems) {
+    newCartItems = addCartItem(newCartItems, item);
+  }
+  return newCartItems;
+}
+
 export function addCartItem(cartItems, addedItem) {
   let newCartItems = [];
   const tmpCart = [...cartItems];
