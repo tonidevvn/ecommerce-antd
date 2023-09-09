@@ -32,18 +32,8 @@ const ShoppingCart = () => {
   };
 
   const CartHolder = () => {
-    console.log("🚀 ~ file: index.js:24 ~ CartHolder ~ cartItems:", cartItems);
-
     const handleRemoveCartItem = (item) => {
-      console.log(
-        "🚀 ~ file: index.js:23 ~ handleRemoveCartItem ~ cartItems:",
-        cartItems
-      );
       const newCartItems = removeCartItem(cartItems, item);
-      console.log(
-        "🚀 ~ file: index.js:23 ~ handleRemoveCartItem ~ newCartItems:",
-        newCartItems
-      );
       setCartItems(newCartItems);
     };
 
@@ -65,8 +55,8 @@ const ShoppingCart = () => {
                 avatar={<Avatar src={`${item.thumbnail}`} size={"small"} />}
                 title={<a href="/">{item.title}</a>}
                 description={
-                  <Typography.Text type="danger">
-                    {item.quantity} x {"$ "} {item.price}
+                  <Typography.Text type="danger" strong>
+                    {item.quantity} x ${item.price}
                   </Typography.Text>
                 }
               />

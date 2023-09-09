@@ -9,7 +9,7 @@ import Meta from "antd/es/card/Meta";
 
 import { Typography, Badge } from "antd";
 import { AppContext } from "../../context";
-import { addCartItem } from "../../utils";
+import { addCartItem, hashidsEncode } from "../../utils";
 import {
   DownOutlined,
   SortAscendingOutlined,
@@ -112,7 +112,7 @@ const ListProducts = ({ products }) => {
                   <>
                     <Typography.Paragraph>
                       <Typography.Title level={4}>
-                        <Link to={`/products/${product.id}`}>
+                        <Link to={`/products/${hashidsEncode(product.id)}`}>
                           {product.title}
                         </Link>
                       </Typography.Title>

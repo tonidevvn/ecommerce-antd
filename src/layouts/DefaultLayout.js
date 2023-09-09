@@ -2,14 +2,17 @@ import { Layout, theme, Breadcrumb } from "antd";
 import { Outlet, useParams } from "react-router-dom";
 import AppFooter from "../components/Footer";
 import AppHeader from "../components/Header/AppHeader";
-import { makeUpLabel } from "../utils";
+import { hashidsDecode, makeUpLabel } from "../utils";
 import App from "../App";
+import { getSingleProduct } from "../services";
+import { useEffect, useState } from "react";
 const { Header, Footer, Content } = Layout;
 
 function DefaultLayout(props) {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+  const [breadCrumbs, setBreadCrumbs] = useState([]);
 
   const headerStyle = {
     overflow: "hidden",
@@ -43,14 +46,27 @@ function DefaultLayout(props) {
   };
 
   const params = useParams();
-  const key = params.categoryId;
-  let breadCrumbs = [{ title: "Home", href: "/" }];
+  const cid = params.categoryId;
+  const pid = params.productId;
 
-  if (!!key)
-    breadCrumbs = [
-      ...breadCrumbs,
-      { title: makeUpLabel(key), href: `/products/categories/${key}` },
-    ];
+  useEffect(() => {
+    if (!!cid) {
+      setBreadCrumbs([
+        { title: "Home", href: "/" },
+        { title: makeUpLabel(cid), href: `/products/categories/${cid}` },
+      ]);
+    } else if (!!pid) {
+      getSingleProduct(hashidsDecode(pid)).then((resp) => {
+        setBreadCrumbs([
+          { title: "Home", href: "/" },
+          {
+            title: makeUpLabel(resp.category),
+            href: `/products/categories/${resp.categoryid}`,
+          },
+        ]);
+      });
+    }
+  }, [cid, pid]);
 
   return (
     <App>

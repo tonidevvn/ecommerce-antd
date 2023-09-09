@@ -1,4 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
+import Hashids from "hashids";
+
+const hashids = new Hashids("Toni", 10);
 
 export function makeUpLabel(key) {
   let newTitle = key.charAt(0).toUpperCase() + key.slice(1);
@@ -6,6 +9,14 @@ export function makeUpLabel(key) {
   return newTitle.replace(/-(.)/g, function (match, group) {
     return " " + group.toUpperCase();
   });
+}
+
+export function hashidsEncode(anything) {
+  return hashids.encode(anything);
+}
+
+export function hashidsDecode(anything) {
+  return hashids.decode(anything);
 }
 
 export function addCartItem(cartItems, addedItem) {

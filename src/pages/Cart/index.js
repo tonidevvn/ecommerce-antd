@@ -13,7 +13,8 @@ import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AppContext } from "../../context";
 import ShoppingImg from "../../assets/images/shopping.svg";
-import { clearCart, updateCart } from "../../utils";
+import { clearCart, removeCartItem, updateCart } from "../../utils";
+import { DeleteOutlined } from "@ant-design/icons";
 
 const CheckoutCartBtn = ({ onFinish }) => {
   const [checkoutDrawerOpen, setCheckoutDrawerOpen] = useState(false);
@@ -98,6 +99,41 @@ function Cart() {
     navigator("/thank-you");
   };
 
+  const handleRemoveCartItem = (item) => {
+    const newCartItems = removeCartItem(cartItems, item);
+    setCartItems(newCartItems);
+  };
+
+  const getCartSummary = () => {
+    const data = cartItems;
+    const total = data.reduce((prev, curr) => {
+      return prev + curr.total;
+    }, 0);
+
+    const discountPrice = data.reduce((prev, curr) => {
+      return prev + curr.discountedPrice;
+    }, 0);
+
+    const totalQty = data.reduce((prev, curr) => {
+      return prev + curr.quantity;
+    }, 0);
+
+    return (
+      <>
+        <div className="cartSummary">
+          Discounted amount: ${parseFloat(total - discountPrice).toFixed(0)}
+        </div>
+        <div className="cartSummary">
+          Total amount ({totalQty} items): $
+          {parseFloat(discountPrice).toFixed(0)}{" "}
+          <Typography.Text delete type="danger">
+            ${parseFloat(total).toFixed(0)}
+          </Typography.Text>
+        </div>
+      </>
+    );
+  };
+
   return (
     <>
       {!!cartItems && cartItems.length > 0 ? (
@@ -107,45 +143,23 @@ function Cart() {
             <Table
               dataSource={cartItems}
               pagination={false}
+              scroll={{ x: 860 }}
               rowKey={(data) => data.id}
-              summary={(data) => {
-                const total = data.reduce((prev, curr) => {
-                  return prev + curr.total;
-                }, 0);
-
-                const discountPrice = data.reduce((prev, curr) => {
-                  return prev + curr.discountedPrice;
-                }, 0);
-
-                const totalQty = data.reduce((prev, curr) => {
-                  return prev + curr.quantity;
-                }, 0);
-
-                return (
-                  <>
-                    <tr>
-                      <td colSpan="4">
-                        <span className="cartSummary">
-                          Discounted amount: $
-                          {parseFloat(total - discountPrice).toFixed(0)}
-                        </span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td colSpan="4">
-                        <span className="cartSummary">
-                          Total amount ({totalQty} items): $
-                          {parseFloat(discountPrice).toFixed(0)}{" "}
-                          <Typography.Text delete type="danger">
-                            ${parseFloat(total).toFixed(0)}
-                          </Typography.Text>
-                        </span>
-                      </td>
-                    </tr>
-                  </>
-                );
-              }}
               columns={[
+                {
+                  title: "Action",
+                  key: "action",
+                  fixed: "left",
+                  width: 80,
+                  render: (_, record) => (
+                    <a
+                      href="#delete"
+                      onClick={() => handleRemoveCartItem(record)}
+                    >
+                      <DeleteOutlined style={{ color: "red" }} />
+                    </a>
+                  ),
+                },
                 {
                   title: "Title",
                   dataIndex: "title",
@@ -153,6 +167,7 @@ function Cart() {
                 {
                   title: "Quantity",
                   dataIndex: "quantity",
+                  width: 120,
                   render: (value, record) => {
                     return (
                       <InputNumber
@@ -193,6 +208,7 @@ function Cart() {
                 {
                   title: "Price",
                   dataIndex: "price",
+                  width: 220,
                   render: (value, record) => {
                     return `$${value}`;
                   },
@@ -200,12 +216,14 @@ function Cart() {
                 {
                   title: "Total",
                   dataIndex: "total",
+                  width: 220,
                   render: (value, record) => {
                     return `$${value}`;
                   },
                 },
               ]}
             />
+            <Typography.Paragraph>{getCartSummary()}</Typography.Paragraph>
             <CheckoutCartBtn onFinish={() => handleCheckoutSubmit()} />
           </div>
         </>

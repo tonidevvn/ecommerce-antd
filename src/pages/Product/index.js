@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { getSingleProduct } from "../../services";
 import {
   Button,
@@ -15,7 +15,7 @@ import {
 } from "antd";
 import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
 import "./Product.scss";
-import { addCartItem, makeUpLabel } from "../../utils";
+import { addCartItem, hashidsDecode, makeUpLabel } from "../../utils";
 import { AppContext } from "../../context";
 
 function Product() {
@@ -29,11 +29,11 @@ function Product() {
 
   const params = useParams();
   const key = params.productId;
-  console.log("🚀 ~ file: index.js:8 ~ Product ~ key:", key);
+  console.log("🚀 ~ file: index.js:8 ~ Product ~ key:", hashidsDecode(key));
 
   useEffect(() => {
     setFetchingData(true);
-    getSingleProduct(key).then((resp) => {
+    getSingleProduct(hashidsDecode(key)).then((resp) => {
       console.log("🚀 ~ file: index.js:13 ~ getSingleProduct ~ resp:", resp);
       setTimeout(() => {
         setProduct(resp);
@@ -97,8 +97,8 @@ function Product() {
               <Typography.Title level={3}>{product.title}</Typography.Title>
               <div className="productRating">
                 <Space>
-                  <Rate value={product.rating} allowHalf></Rate>
-                  <Typography.Text>Sold {product.stock}</Typography.Text>
+                  <Rate value={product.rating} allowHalf disabled></Rate>
+                  <Typography.Text strong>Sold {product.stock}</Typography.Text>
                 </Space>
               </div>
               <div className="productPrice">
@@ -131,10 +131,6 @@ function Product() {
                   ${product.price}
                 </Typography.Text>
               </div>
-              <div className="productDesc">
-                <Typography.Text strong> {product.description}</Typography.Text>
-              </div>
-
               <div className="productMeta">
                 <div className="productMetaRow">
                   <span className="productMetaLeft">Brand</span>
@@ -143,7 +139,9 @@ function Product() {
                 <div className="productMetaRow">
                   <span className="productMetaLeft">Category</span>
                   <span className="productMetaRight">
-                    {makeUpLabel(product.category)}
+                    <Link to={`/products/categories/${product.category}`}>
+                      {makeUpLabel(product.category)}
+                    </Link>
                   </span>
                 </div>
                 <div className="productMetaRow">
@@ -152,23 +150,27 @@ function Product() {
                 </div>
                 <div className="productMetaRow">
                   <span className="productMetaLeft">Quantity</span>
-                  <div className="productMetaRight cartQty ">
+                  <div className="productMetaRight">
                     <Button
                       onClick={() => setCartQty(cartQty > 0 ? cartQty - 1 : 0)}
+                      className="updownQty"
                     >
                       <MinusOutlined />
                     </Button>
-                    <Input
-                      value={cartQty}
-                      min={0}
-                      style={{ width: "50px", textAlign: "center" }}
-                    />
-                    <Button onClick={() => setCartQty(cartQty + 1)}>
+                    <Input value={cartQty} min={0} className="cartQty" />
+                    <Button
+                      onClick={() => setCartQty(cartQty + 1)}
+                      className="updownQty"
+                    >
                       <PlusOutlined />
                     </Button>
                   </div>
                 </div>
               </div>
+              <div className="productDesc">
+                <Typography.Text strong> {product.description}</Typography.Text>
+              </div>
+
               <div className="addToCart">
                 <Space>
                   <Button
@@ -232,19 +234,18 @@ function Product() {
               <div className="productPrice">
                 <Skeleton.Input active size={"default"} />
               </div>
-              <div className="productDesc">
-                <Skeleton
-                  paragraph={{
-                    rows: 1,
-                  }}
-                  active
-                />
-              </div>
-
               <div className="productMeta">
                 <Skeleton
                   paragraph={{
                     rows: 3,
+                  }}
+                  active
+                />
+              </div>
+              <div className="productDesc">
+                <Skeleton
+                  paragraph={{
+                    rows: 1,
                   }}
                   active
                 />
