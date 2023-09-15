@@ -1,7 +1,33 @@
+$lightbgColor: #fff !important;
+$lighttextColor: #000 !important;
+
+$darkbgColor: #000 !important;
+$darktextColor: #fff !important;
+
 .App {
   display: flex;
   flex-direction: column;
   width: 100%;
   height: auto;
   min-height: 100vh;
+  background-color: $lightbgColor;
+  color: $lighttextColor;
+
+  header,
+  main,
+  .ant-layout {
+    background-color: $lightbgColor;
+    color: $lighttextColor;
+  }
+
+  &.dark {
+    background-color: $darkbgColor;
+    color: $darktextColor;
+    header,
+    main,
+    .ant-layout {
+      background-color: $darkbgColor;
+      color: $darktextColor;
+    }
+  }
 }
