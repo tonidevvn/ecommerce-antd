@@ -1,11 +1,7 @@
 import Products from "../../components/Products";
 
 function Home() {
-  return (
-    <div>
-      <Products />
-    </div>
-  );
+  return <Products />;
 }
 
 export default Home;

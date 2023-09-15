@@ -1,7 +1,16 @@
 import { useEffect, useMemo, useState } from "react";
 import Hashids from "hashids";
 
+const DARK_MODE = "dark-mode";
 const hashids = new Hashids("Toni", 10);
+
+export function getColorMode() {
+  return localStorage.getItem(DARK_MODE) || "light";
+}
+
+export function saveColorMode(colorMode) {
+  localStorage.setItem(DARK_MODE, colorMode);
+}
 
 export function makeUpLabel(key) {
   let newTitle = key.charAt(0).toUpperCase() + key.slice(1);
