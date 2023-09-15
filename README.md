@@ -70,6 +70,14 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 ![Screenshot-8](/public/Screenshot_8_MobileDisp.jpg?raw=true "Mobile view")
 
+### Login view
+
+![Screenshot-8](/public/Screenshot_9_Login.jpg?raw=true "Login view")
+
+### Dashboard view
+
+![Screenshot-8](/public/Screenshot_10_Dashboard.jpg?raw=true "Dashboard view")
+
 ## ✨ Features
 
 User views:
