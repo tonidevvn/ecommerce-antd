@@ -2,6 +2,7 @@ import { Layout, Breadcrumb, theme } from "antd";
 import AppHeader from "../components/Header";
 import AppFooter from "../components/Footer";
 import { Outlet } from "react-router-dom";
+import App from "../App";
 const { Header, Footer, Sider, Content } = Layout;
 
 function LayoutWithSidebar() {
@@ -36,7 +37,7 @@ function LayoutWithSidebar() {
   };
 
   return (
-    <div className="App">
+    <App>
       <Layout>
         <Header style={headerStyle}>
           <AppHeader />
@@ -66,7 +67,7 @@ function LayoutWithSidebar() {
           <AppFooter />
         </Footer>
       </Layout>
-    </div>
+    </App>
   );
 }
 
