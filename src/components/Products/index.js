@@ -194,7 +194,7 @@ function Products({ category, query }) {
   };
 
   const onChange = (key) => {
-    console.log(key);
+    //console.log(key);
     sortProductsBy(key);
   };
 

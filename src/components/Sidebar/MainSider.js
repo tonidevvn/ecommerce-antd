@@ -39,7 +39,7 @@ function Sidebar() {
       >
         <Checkbox.Group
           options={categories.map((cat) => {
-            return { label: makeUpLabel(cat), value: cat };
+            return { label: cat.name, value: cat.slug };
           })}
           value={checkedList}
           onChange={onChange}

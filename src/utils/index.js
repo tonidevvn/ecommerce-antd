@@ -13,6 +13,8 @@ export function saveColorMode(colorMode) {
 }
 
 export function makeUpLabel(key) {
+  if (key == null || key === undefined) return "";
+
   let newTitle = key.charAt(0).toUpperCase() + key.slice(1);
 
   return newTitle.replace(/-(.)/g, function (match, group) {
