@@ -1,11 +1,12 @@
 import { createContext, useState } from "react";
+import { getColorMode } from "../utils";
 
 const AppContext = createContext();
 
 const AppContextProvider = (props) => {
   const [user, setUser] = useState("");
   const [cartItems, setCartItems] = useState([]);
-  const [colorMode, setColorMode] = useState("light");
+  const [colorMode, setColorMode] = useState(getColorMode());
 
   const contextValues = {
     cartItems,

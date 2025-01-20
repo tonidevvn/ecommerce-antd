@@ -1,4 +1,4 @@
-import { Layout, theme, Breadcrumb } from "antd";
+import { Layout, Breadcrumb } from "antd";
 import { Outlet, useParams } from "react-router-dom";
 import AppFooter from "../components/Footer";
 import AppHeader from "../components/Header/AppHeader";
@@ -9,9 +9,6 @@ import { useEffect, useState } from "react";
 const { Header, Footer, Content } = Layout;
 
 function DefaultLayout(props) {
-  const {
-    token: { colorBgContainer },
-  } = theme.useToken();
   const [breadCrumbs, setBreadCrumbs] = useState([]);
 
   const headerStyle = {
@@ -20,8 +17,7 @@ function DefaultLayout(props) {
     height: 64,
     paddingInline: 50,
     lineHeight: "64px",
-    background: colorBgContainer,
-    boxShadow: "1px 4px 4px #00000033",
+    boxShadow: "1px 4px 4px rgba(255, 255, 255, 0.2)",
     position: "fixed" /* Set the navbar to fixed position */,
     top: 0 /* Position the navbar at the top of the page */,
     width: "100%" /* Full width */,
@@ -76,7 +72,7 @@ function DefaultLayout(props) {
         <Header style={headerStyle}>
           <AppHeader />
         </Header>
-        <Content style={contentStyle}>
+        <Content className="contentDiv" style={contentStyle}>
           <Breadcrumb
             style={{
               margin: "16px 0",
@@ -86,8 +82,7 @@ function DefaultLayout(props) {
           ></Breadcrumb>
           <Layout
             style={{
-              padding: "24px 0",
-              background: colorBgContainer,
+              padding: "12px 0",
             }}
           >
             <Outlet />
